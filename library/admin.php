@@ -8,6 +8,43 @@ via the functions file.
 */ //http://speckyboy.com/2011/04/27/20-snippets-and-hacks-to-make-wordpress-user-friendly-for-your-clients/
 
 /* ==================
+ * Custom Welcome Panel
+ */ // This is a custom welcome panel, sort of. The 
+// correct way of updating the welcome panel content
+// is still only visible to users that can edit_theme_options.
+// This takes the welcome-panel styles and adds it as an admin_notice.
+function sherman_welcome_panel() {
+
+	$screen = get_current_screen();
+	if ( $screen->base == 'dashboard' ) {
+	echo
+		'<div class="wrap">'.
+			'<h2></h2>'.
+			'<div id="welcome-panel" class="welcome-panel">'.
+				'<section class="welcome-panel-content">' .
+					'<h3>Sherman Library Wordpress Network</h3>' .
+					'<p class="about-description">Hey there! Welcome to <strong>LibraryLearn</strong>.</p>'.
+					'<p>This is the repo and workspace for video-making. Watch your step! There are film canisters everywhere.</p>' .
+
+					'<div class="welcome-column-container">'.
+						'<div class="welcome-panel-column">'.
+							'<a class="button button-primary button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase/making-instructional-videos-for-the-nsu-libraries/" target="new">Tutorial</a>'.
+							'<p>This is an in-depth guide to making instructional videos for the NSU Libraries. It covers raw specs, walkthroughs, and content strategy.</p>'.
+						'</div>'.
+						'<div class="welcome-panel-column">'.
+							'<a class="button button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase-category/library_learn/" target="new">Knowledgebase</a>'.
+							'<p>"LibraryLearn" entries in the labs <strong>knowledgebase</strong> including best practices, various FAQs, and known issues.</p>'.
+						'</div>'.
+					'</div>' .
+			'</section>'.
+			'</div>'.
+		'</div>';
+	}
+}
+remove_action( 'welcome_panel', 'wp_welcome_panel');
+add_action( 'admin_notices', 'sherman_welcome_panel' );
+
+/* ==================
  * Core Plugins
  */ // This disables the admin deactivation of certain core-to-the-experience plugins
 // from http://sltaylor.co.uk/blog/disabling-wordpress-plugin-deactivation-theme-changing/
@@ -31,7 +68,7 @@ add_filter( 'plugin_action_links', 'lock_plugins', 10, 4 );
  */ // This removes admin panel options
 function remove_menus() {
 global $menu;
-    $restricted = array(__('Posts'), __('Media'), __('Pages'), __('Users'), __('Settings'), __('Comments'), __('Plugins'), __('Tools'));
+    $restricted = array(__('Posts'), __('Pages'), __('Users'), __('Settings'), __('Comments'), __('Plugins'), __('Tools'));
     end ($menu);
     while (prev($menu)){
         $value = explode(' ',$menu[key($menu)][0]);

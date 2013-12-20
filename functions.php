@@ -175,14 +175,14 @@ function bones_register_sidebars() {
 /* ==================
  * Allow Captions to be Uploadable */
 function add_upload_mime_types( $mimes ) {
-    if ( function_exists( 'current_user_can' ) ) {
-        $unfiltered = $user ? user_can( $user, 'unfiltered_html' ) : current_user_can( 'unfiltered_html' );
-    }
+    //if ( function_exists( 'current_user_can' ) ) {
+    //    $unfiltered = $user ? user_can( $user, 'edit_posts' ) : current_user_can( 'edit_posts' );
+    //}
 
-    if ( !empty( $unfiltered) ) {
+    //if ( !empty( $unfiltered) ) {
         $mimes['srt'] = 'text/plain';
         $mimes['vtt'] = 'text/vtt';
-    }
+    //}
 
     return $mimes;
 

@@ -76,7 +76,7 @@
 							</header>
 							<ul>
 								<li>
-									Read the <a href="<?php echo wp_get_attachment_url( get_post_meta( get_the_ID(), 'captions', true ) ); ?>.srt">Transcript</a>
+									Read the <a href="<?php echo wp_get_attachment_url( get_post_meta( get_the_ID(), 'captions', true ) ); ?>">Transcript</a>
 								</li>
 								<li>
 									Download the <a href="<?php echo $video_root; ?>.mp4" title="Download the MP4">Video</a> (.mp4)

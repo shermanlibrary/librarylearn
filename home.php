@@ -1,33 +1,31 @@
 <?php get_header(); ?>
 
-	<?php 
+	<?php 		
 		// Get Options, show feature.
 		//get_template_part('template--feature-series'); 
-		get_template_part('template--feature-recent');
+
+		if ( $ua->isComputer) { get_template_part('template--feature-recent'); }
 	?>
 
-<!-- Browse the Catalog
+<!-- Browse the Website
 ======================
--->	<section class="catalog search shadow">
+-->	<section class="catalog search site-search">
 
-		<div class="wrap clearfix">
+		<form class="align-left wrap clearfix" role="search" method="get" id="searchform" action="#">
 
-			<div class="fourcol first">
-			<header class="gamma no-margin">
+			<label class="gamma no-margin" for="s">
 				<em>Learn something new!</em>
-			</header>
-			</div>
+			</label>
 
-			<div class="eightcol last">
-				<form class="align-left" role="search" method="get" id="searchform" action="#">
-				    <input type="search" value="" name="s" id="s" placeholder="<?php echo esc_attr__('APA, Find It, Journal Finder, Education, etc.','bonestheme') ?>" x-webkit-speech speech />
-				    <input class="search-button" type="submit" id="searchsubmit" value="<?php echo esc_attr__('Go') ?>" />
-			    </form>
+			<div class="input">				
+			    <input type="search" value="" name="s" id="s" placeholder="<?php echo esc_attr__('APA, FindIt, Journal Finder, Education, etc. ','bonestheme') ?>" x-webkit-speech speech />
+			    <input class="search-button" type="submit" id="searchsubmit" value="<?php echo esc_attr__('Go') ?>" />
 		    </div>
 
-		</div><!--/.wrap-->
+	    </form>
 
 	</section><!--/.catalog-->
+
 
 <!-- Menu
 ======================
@@ -59,22 +57,19 @@
 -->	<div id="content">
 	
 		<div id="inner-content" class="wrap clearfix">
-	
-		<!--<figure class="caption">
-				<blockquote>
-					<header>
-						<em class="gamma">Learn to use the library!</em>
-					</header>
-					<p class="delta">
-						<strong>LibraryLearn</strong> is a hot spot for brief 
-						videos demonstrating the use of our vast resources. Learn how to develop
-						a successful research strategy, get the most out of 
-						<a href="http://novacat.nova.edu" target-"new">NovaCat</a> (the <b>cat</b>alog),
-						find articles in the <a href="http://sherman.library.nova.edu/e-library" target="new">E-Library</a>, and more.
-					</p>
-				</blockquote>
-			</figure>
-		-->
+
+			<blockquote class="page-description">
+				<header>
+					<em class="gamma">What is <strong>LibraryLearn</strong>?</em>
+				</header>
+				<p class="delta">
+					<em>LibraryLearn</em> is a hub for brief, to-the-point videos
+					made by <abbr title="Nova Southeastern University">NSU</abbr> Librarians
+					demonstrating how to use a variety of library resources, design 
+					research strategies, master <a href="//novacat.nova.edu" title="NovaCat: NSU Libraries Catalog">NovaCat</a>,
+					and more.
+				</p>
+			</blockquote>
 
 		    <div id="main" role="main">
 		    	
@@ -93,7 +88,7 @@
 						'feed'               => '',
 						'feed_type'          => '',
 						'feed_image'         => '',
-						'exclude'            => '1, 8, 14, 21, 17', // Exclude "Miscellaenous"
+						'exclude'            => '1, 3, 4, 5', // Exclude "Miscellaenous"
 						'exclude_tree'       => '',
 						'include'            => '',
 						'hierarchical'       => 1,
