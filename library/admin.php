@@ -44,6 +44,7 @@ function sherman_welcome_panel() {
 remove_action( 'welcome_panel', 'wp_welcome_panel');
 add_action( 'admin_notices', 'sherman_welcome_panel' );
 
+
 /* ==================
  * Core Plugins
  */ // This disables the admin deactivation of certain core-to-the-experience plugins
@@ -68,7 +69,7 @@ add_filter( 'plugin_action_links', 'lock_plugins', 10, 4 );
  */ // This removes admin panel options
 function remove_menus() {
 global $menu;
-    $restricted = array(__('Posts'), __('Pages'), __('Users'), __('Settings'), __('Comments'), __('Plugins'), __('Tools'));
+    $restricted = array(__('Posts'), __('Media'), __('Pages'), __('Users'), __('Settings'), __('Comments'), __('Plugins'), __('Tools'));
     end ($menu);
     while (prev($menu)){
         $value = explode(' ',$menu[key($menu)][0]);

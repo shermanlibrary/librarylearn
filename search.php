@@ -4,27 +4,30 @@
 			
 				<div id="inner-content" class="clearfix">
 				
-				    <div id="main" class="grid-view wrap clearfix" role="main">
+				    <div id="main" class="wrap clearfix" role="main">
 						
 						<h1 class="archive-title hide-text"> Search Results </h1>
 
 					     <?php if (have_posts()) : ?> 
-							<blockquote class="page-description">
+						<figure class="caption">
+							<blockquote>
 								<header>
 									<em class="gamma">Searching ... </em>
 								</header>
 								<p class="delta">
 									Good news! We looked all over for <strong><?php echo esc_attr(get_search_query()); ?></strong> and 
-									hopefully we found a video that will help. You can always <a href="<?php echo get_permalink( 167 ); ?>" title="Suggest a Video">suggest a video</a>, but if you are
-									in a bind don't forget that you can <a href="//nova.edu/library/main/ask.html" title="Ask a Librarian">ask a librarian</a> directly!
+									hopefully we found a video that will help. You can always <a href="#">suggest a video</a>, but if you are
+									in a bind don't forget that you can <a href="#">ask a librarian</a> directly!
 								</p>
 							</blockquote>
+						</figure>
 
 					     <?php $i = 0; while (have_posts()) : if ( $i < 4 ) { $i++; } if ( $i == 4 ) { $i = 1; } the_post(); ?>
 					
-					<div class="fourcol <?php echo ( $i == 1 ? 'first' : ( $i == 3 ? 'last' : '' ) ) ?>">
+					
+					<div class="fourcol <?php echo ( $i == 1 ? 'first' : ( $i == 3 ? 'last' : '' ) ) ?>" style="height:600px;">
 						    
-						    <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix cell'); ?> role="article">
+						    <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix portlet'); ?> role="article">
 								
 								<div class="media">
 		    						
@@ -47,8 +50,7 @@
 						
 						    </article> <!-- end article -->
 					</div>
-
-				
+					
 					    <?php endwhile; ?>	
 					
 					        <?php if (function_exists('bones_page_navi')) { // if experimental feature is active ?>
@@ -79,8 +81,8 @@
 										<p class="delta">
 
 											Sorry. We looked all over for <strong><?php echo esc_attr(get_search_query()); ?></strong> and we
-											came up short. You can always <a href="<?php echo get_permalink( 167 ); ?>" title="Suggest a Video">suggest a video</a>, but if you are
-											in a bind don't forget that you can <a href="//nova.edu/library/main/ask.html" title="Ask a Librarian">ask a librarian</a> directly!
+											came up short. You can always <a href="#">suggest a video</a>, but if you are
+											in a bind don't forget that you can <a href="#">ask a librarian</a> directly!
 										</p>
 									</blockquote>
 								</figure>

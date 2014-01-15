@@ -10,7 +10,7 @@ function library_academy_menu( $menu, $element ) {
 
                 if ( 
                     is_category( 'getting-started' ) ||
-                    post_is_in_descendant_category( 5 )               
+                    post_is_in_descendant_category( 14 )               
                     ) {
                         $element = 'Getting Started';
                     }
@@ -19,7 +19,7 @@ function library_academy_menu( $menu, $element ) {
 
                 if ( 
                     is_category( 'research' )  ||
-                    post_is_in_descendant_category( 4 ) 
+                    post_is_in_descendant_category( 21 ) 
                     ) {
 
                         $element = 'Research';
@@ -36,7 +36,7 @@ function library_academy_menu( $menu, $element ) {
 
 
                 if ( is_category( 'citation-management' ) ||
-                    post_is_in_descendant_category( 3 ) 
+                    post_is_in_descendant_category( 8 ) 
                     ) {
 
                         $element = 'Citation Management';

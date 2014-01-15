@@ -1,10 +1,9 @@
 <?php get_header(); ?>
 
-	<?php 		
+	<?php 
 		// Get Options, show feature.
 		//get_template_part('template--feature-series'); 
-
-		if ( $ua->isComputer) { get_template_part('template--feature-recent'); }
+		get_template_part('template--feature-recent');
 	?>
 
 <!-- Browse the Website
@@ -18,7 +17,7 @@
 			</label>
 
 			<div class="input">				
-			    <input type="search" value="" name="s" id="s" placeholder="<?php echo esc_attr__('APA, FindIt, Journal Finder, Education, etc. ','bonestheme') ?>" x-webkit-speech speech />
+			    <input type="search" value="" name="s" id="s" placeholder="<?php echo esc_attr__('APA, FindIt, Journal Finder, Education, etc.','bonestheme') ?>" x-webkit-speech speech />
 			    <input class="search-button" type="submit" id="searchsubmit" value="<?php echo esc_attr__('Go') ?>" />
 		    </div>
 

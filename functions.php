@@ -176,7 +176,7 @@ function bones_register_sidebars() {
  * Allow Captions to be Uploadable */
 function add_upload_mime_types( $mimes ) {
     //if ( function_exists( 'current_user_can' ) ) {
-    //    $unfiltered = $user ? user_can( $user, 'edit_posts' ) : current_user_can( 'edit_posts' );
+    //    $unfiltered = $user ? user_can( $user, 'unfiltered_html' ) : current_user_can( 'unfiltered_html' );
     //}
 
     //if ( !empty( $unfiltered) ) {

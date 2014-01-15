@@ -4,13 +4,13 @@
 			
 				<div id="inner-content" class="clearfix">
 				
-				    <div id="main" class="grid-view wrap clearfix" role="main">
+				    <div id="main" class="wrap clearfix" role="main">
 				
 					    <?php if (have_posts()) : $i = 0; while (have_posts()) : if ( $i < 4 ) { $i++; } if ( $i == 4 ) { $i = 1; } the_post(); ?>
 					
-						<div class="fourcol <?php echo ( $i == 1 ? 'first' : ( $i == 3 ? 'last' : '' ) ) ?>">
+						<div class="fourcol <?php echo ( $i == 1 ? 'first' : ( $i == 3 ? 'last' : '' ) ) ?>" style="height:600px;">
 						    
-						    <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix cell'); ?> role="article">
+						    <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix portlet'); ?> role="article">
 								
 								<div class="media">
 		    						

@@ -1,9 +1,6 @@
 /* ==================
  * Contents
  * ================== */
-/* ==================
- * 1. Upfront Scripts
- */
 
 /* ==================
  * Responsive Script */
@@ -28,20 +25,7 @@ if (!window.getComputedStyle) {
 // as the page loads, call these scripts
 jQuery(document).ready(function($) {
 
-    /* ==================
-     * $FitText
-     */ // You know, for glorious branding ...
-     //(function($){$.fn.fitText=function(kompressor,options){var compressor=kompressor||1,settings=$.extend({"minFontSize":Number.NEGATIVE_INFINITY,"maxFontSize":Number.POSITIVE_INFINITY},options);return this.each(function(){var $this=$(this);var resizer=function(){$this.css("font-size",Math.max(Math.min($this.width()/(compressor*10),parseFloat(settings.maxFontSize)),parseFloat(settings.minFontSize)))};resizer();$(window).on("resize.fittext orientationchange.fittext",resizer)})}})(jQuery);
-     //$('.fit-text').fitText({maxFontSize: '117px'})
-
-    /*
-    Responsive jQuery is a tricky thing.
-    There's a bunch of different ways to handle
-    it so, be sure to research and find the one
-    that works for you best.
-    */
-    
-    /* getting viewport width */
+   /* getting viewport width */
     var responsive_viewport = $(window).width();
 
 /* ==================
@@ -54,22 +38,12 @@ jQuery(document).ready(function($) {
       });
     }
 
+    // TODO: Abstract this to IE9.js
     if ( $('html').hasClass('lt-ie9') ) {
       $('nav.pill-menu .label').on('click', function( e ) {
         $(this).next('.sub-menu').toggle();
       });
     }
-
-  /* if is above or equal to 768px */
-  if (responsive_viewport >= 768) {
-      
-      /* load gravatars */
-      $('.comment img[data-gravatar]').each(function(){
-          $(this).attr('src',$(this).attr('data-gravatar'));
-      });
-  }
-    
-
 }); /* end of as page load scripts */
 
 
