@@ -1,74 +1,31 @@
-<!-- A Feature Section
-======================
--->	<div id="feature" class="feature recent separator video">
+<?php
 
-		<div id="inner-feature" class="wrap clearfix">
+	$args = array(
+				'posts_per_page'	=> 1,
+				'post_type'			=> 'academy_video'
+			);								
+	$recent_videos = get_posts( $args );
 
-		<?php
+	foreach ( $recent_videos as $post ) : setup_postdata( $post ); 
 
-			$args = array(
-						'posts_per_page'	=> 1,
-						'post_type'			=> 'academy_video'
-					);								
-			$recent_videos = get_posts( $args );
-			foreach ( $recent_videos as $post ) : setup_postdata( $post ); 
-		?>
-			<div class="sixcol first">
-				<div class="media contrast-against-dark">
+	$title = ( get_post_meta( get_the_ID(), 'overlay_title', true) ? get_post_meta( get_the_ID(), 'overlay_title', true ) : get_the_title() );
+	$excerpt = preg_replace( '/\s+?(\S+)?$/', '', substr( get_the_excerpt(), 0, 275) );
+?>
 
+<section class="feature feature-event">
 
-		<?php
+	<div class="feature-event" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>);">
+		<article class="card" itemscope="" itemtype="http://schema.org/Event"><header>
+			<a href="<?php the_permalink(); ?>" itemprop="url">
+			<h3 class="beta title no-margin" itemprop="name"><?php echo $title; ?></h3>
+		</a>
+	</header>
+	<div class="has-excerpt">
+		<p class="excerpt" itemprop="description">
+			<?php echo get_the_excerpt(); ?>
+		</p></div>
+<a class="button coral" href="<?php the_permalink(); ?>">Watch</a></article>
+</div></section>
 
-			// 1. Get the format of the tutorial
-			$academy_video_format = get_post_meta( get_the_ID(), 'academy_video_format', true); 
-
-			/* ==================
-			 * From here, some logic!
-			 */ // If the tutorial video requires anything but the standalone files
-				// --it was produced through Adobe Captivate, for instance--then we need 
-				// to adjust the display accordingly.
-				if ( $academy_video_format != 'standard' ) :
-
-					$adobe_captivate_url = get_post_meta( get_the_ID(), 'captivate_url', true);
-				 ?>
-
-				 <div class="fluid-embed-wrapper">
-				 	<iframe frameborder="0" src="<?php echo $adobe_captivate_url ?>"></iframe>
-			 	</div>
-
-
-				<?php
-				else :
-				 ?>
-
-				<?php get_template_part('template-standard_video_format'); ?>
-				<?php $video_root = 'http://www.nova.edu/library/video/' . get_post_meta( get_the_ID(), 'academy_video_file', true); ?>
-
-
-
-			<?php endif; ?>
-
-				</div>
-			</div>
-
-			<div class="sixcol last">
-					<h2 class="single-title gamma"><?php the_title(); ?></h3>
-					<!--<p class="meta">
-						<time class="icon-calendar" datetime="<?php // echo the_time('Y-m-j'); ?>" pubdate> 
-							<?php // the_time('F jS, Y'); ?>
-						</time> 
-
-						<span class="icon-mobile"> <?php // echo getPostViews(get_the_ID()); ?> views</span>
-					</p>-->		
-
-						<section class="post-content zeta">
-							<?php echo the_excerpt(); ?>
-
-							<a class="button coral zeta" href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"> Watch </a>
-						</section>
-			</div>
 
 		<?php endforeach; wp_reset_postdata(); wp_reset_query();?>
-		</div>
-
-	</div>

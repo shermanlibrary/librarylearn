@@ -62,11 +62,6 @@ add_image_size( 'media-medium', 570, 321, true );
 add_image_size( 'media-large', 720, 405, true );
 add_image_size( 'media-jumbo', 1140, 641, true );
 
-add_image_size( 'feature-small', 720, 281, true);
-add_image_size( 'feature-medium', 1028, 402, true);
-add_image_size( 'feature-large', 1280, 500, true);
-add_image_size( 'feature-jumbo', 1366, 534, true);
-
 /* ==================
  * Theme Support
  * ================== */    
@@ -330,8 +325,11 @@ function bones_comments($comment, $args, $depth) {
 // Search Form
 function sherman_wpsearch() {
     $form = '<form role="search" method="get" id="searchform" action="' . home_url( '/' ) . '">
-    <input type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="'.esc_attr__('Learn something new!','bonestheme').'" x-webkit-speech speech />
-    <input class="search-button" type="submit" id="searchsubmit" value="'. esc_attr__('Go') .'" />
+        <ul>
+        <li class="append field">
+            <input class="xwide email input" type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="'.esc_attr__('Find a tutorial','bonestheme').'" x-webkit-speech speech />
+            <input class="search-button" type="submit" id="searchsubmit" value="'. esc_attr__('Go') .'" />
+            </li></ul>
     </form>';
     return $form;
 } // don't remove this bracket!

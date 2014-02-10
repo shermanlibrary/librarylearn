@@ -1,30 +1,6 @@
 <?php get_header(); ?>
-
-	<?php 
-		// Get Options, show feature.
-		//get_template_part('template--feature-series'); 
-		get_template_part('template--feature-recent');
-	?>
-
-<!-- Browse the Website
-======================
--->	<section class="catalog search site-search">
-
-		<form class="align-left wrap clearfix" role="search" method="get" id="searchform" action="#">
-
-			<label class="gamma no-margin" for="s">
-				<em>Learn something new!</em>
-			</label>
-
-			<div class="input">				
-			    <input type="search" value="" name="s" id="s" placeholder="<?php echo esc_attr__('APA, FindIt, Journal Finder, Education, etc.','bonestheme') ?>" x-webkit-speech speech />
-			    <input class="search-button" type="submit" id="searchsubmit" value="<?php echo esc_attr__('Go') ?>" />
-		    </div>
-
-	    </form>
-
-	</section><!--/.catalog-->
-
+<?php get_template_part('template--feature-recent'); ?>
+<?php get_template_part( 'template-search' ); ?>
 
 <!-- Menu
 ======================
@@ -51,24 +27,27 @@
 
 	</nav>
 
+<section class="hero wrap clearfix">
+
+	<p class="delta">
+		<strong>LibraryLearn</strong> is a hub for brief, to-the-point videos
+		made by <abbr title="Nova Southeastern University">NSU</abbr> Librarians
+		demonstrating how to use a variety of library resources, design 
+		research strategies, master <a href="//novacat.nova.edu" title="NovaCat: NSU Libraries Catalog">NovaCat</a>,
+		and more.
+	</p>
+
+</section>
+
+<div data-spotlight="librarylearn" data-audience data-category data-post="2"></div>
+
+
+
 <!-- Content!
 ======================
 -->	<div id="content">
 	
 		<div id="inner-content" class="wrap clearfix">
-
-			<blockquote class="page-description">
-				<header>
-					<em class="gamma">What is <strong>LibraryLearn</strong>?</em>
-				</header>
-				<p class="delta">
-					<em>LibraryLearn</em> is a hub for brief, to-the-point videos
-					made by <abbr title="Nova Southeastern University">NSU</abbr> Librarians
-					demonstrating how to use a variety of library resources, design 
-					research strategies, master <a href="//novacat.nova.edu" title="NovaCat: NSU Libraries Catalog">NovaCat</a>,
-					and more.
-				</p>
-			</blockquote>
 
 		    <div id="main" role="main">
 		    	

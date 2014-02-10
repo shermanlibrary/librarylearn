@@ -217,12 +217,14 @@ function library_related_videos() {
         	
         	<?php if ( has_post_thumbnail() ) : ?>
         		
-        		<li class="related_post thumbnail thumbnail--gallery">
+        		<li class="related_post thumbnail thumbnail--gallery resource">
         			<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
         				
         				<?php echo the_post_thumbnail( 'media-small' ); ?>
         				
-        				<span class="caption"><?php the_title(); ?></span>
+        				<span class="caption">	
+        					<?php the_title(); ?>
+        				</span>
         			</a>
         		</li>
 	        <?php endif; ?>

@@ -11,7 +11,7 @@
 	                
 
 		            <p>
-		            	3100 Ray Ferrero Jr. Boulevard in Fort Lauderdale, Florida 33314-1013 <br>
+		            	3100 Ray Ferrero Jr. Boulevard, Fort Lauderdale, Florida 33314-1013 <br>
 		                <a href="tel:19542624600"> (954) 262 - 4600</a> |
 		                <a href="http://www.nova.edu/library/main/feedback.html"> Leave Feedback</a> |
 		                <a href="http://nova.edu/library/main/hours.html"> Library Hours</a>

@@ -28,6 +28,198 @@ jQuery(document).ready(function($) {
    /* getting viewport width */
     var responsive_viewport = $(window).width();
 
+    // Fetch from "The Spotlight"
+    get_spotlight = function( $size ) {
+
+        $('[data-spotlight]').each(function() {
+
+            var el                  =   $(this),
+                audience            =   el.data( 'audience' ),
+                postNo              =   el.data('post'),
+                type                =   el.data('spotlight'),
+
+                // placeholders
+                api, baseAPI, category, markup;
+
+            baseAPI = ( type != 'librarylearn' ? 
+                '//sherman2.library.nova.edu/sites/spotlight/api/taxonomy/get_taxonomy_posts/?taxonomy=library-audience&callback=?' : 
+                '//sherman2.library.nova.edu/sites/demo/api/taxonomy/get_taxonomy_posts/?taxonomy=library-audience&callback=?'
+                );
+
+            // Who is the audience?
+            baseAPI = baseAPI + '&slug=' + ( audience ? audience : 'public' );
+
+            if ( type == 'database' ) {
+                api = baseAPI + '&post_type=spotlight_databases';
+            } 
+
+            else if ( type == 'event' || type == 'feature' ) {
+                api = baseAPI + '&post_type=spotlight_events';
+            }
+
+            else if ( type == 'librarylearn' ) {
+                api = baseAPI + '&post_type=academy_video';
+          }
+
+            $.getJSON( api )
+
+                .success( function( response ) {
+
+                    var count = 0;
+
+                    $.each( response.posts, function( i, post ) {
+
+                        //var end = ( post.custom_fields['event_end'] ) ? post.custom_fields['event_end'][0] : post.custom_fields['event_start'][0];
+                        //    end = end.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3'),
+                        //    end = Date.parse( end ),
+                        //    now = new Date();
+                            
+                        if ( type == 'feature' ) {
+
+                            var $size = ( responsive_viewport >= 720 ) ? ( (responsive_viewport >= 1024) ? 'media-large' : 'media-medium' ) : 'media-small';                                
+
+                           if ( post.custom_fields['is_feature'][0] == 'yes' && post.custom_fields['date_text'] && end > now ) {
+
+                                var excerpt = post.excerpt.replace(/(<([^>]+)>)/ig,""),
+                                    excerpt = excerpt.substring( 0, 275 ),
+                                    date    = post.custom_fields['date_text'],
+                                    link    = ( !post.custom_fields['overlay_link'][0] ) ? post.url : post.custom_fields['overlay_link'],
+                                    button  = ( !post.custom_fields['overlay_button_text'][0] ) ? 'Read More' : post.custom_fields['overlay_button_text'][0];                                    
+
+                                markup = 
+                                    '<div class="feature-event" style="background-image: url(' + post.thumbnail_images[ $size ]['url'] + ');">' +
+                                        '<article class="card" itemscope itemtype="http://schema.org/Event">' +
+                                            '<header>' +
+                                                '<a href="' + post.url + '" itemprop="url">' +
+                                                    '<h3 class="beta title no-margin" itemprop="name">' + post.custom_fields['overlay_title'][0] + '</h3>' +
+                                                '</a>' +
+                                                '<time class="delta">' +
+                                                    '<span itemprop="startDate">' +
+                                                        date + 
+                                                    '</span>' +
+                                                '</time>' +
+                                            '</header>' +
+
+                                            '<div class="has-excerpt">' +
+                                                '<p class="excerpt" itemprop="description">' + excerpt + '</p>' +
+                                            '</div>' +
+
+                                            '<a class="button coral" href="' + link + '">' + button + '</a>' +
+                                        '</article>' +
+                                    '</div>';
+                
+                            }
+                        }
+
+                        else if ( type == 'event' ) {
+
+                           if ( post.custom_fields['is_feature'][0] == 'no' && post.custom_fields['date_text'] && end > now ) {
+
+                                var excerpt = post.excerpt.replace(/(<([^>]+)>)/ig,""),
+                                    excerpt = excerpt.substring( 0, 275 ),
+                                    date    = post.custom_fields['date_text'];  
+
+                                count++;                                  
+
+                                markup = 
+                                '<section class="assorted-features background-base has-background hero clearfix">' + 
+                                    '<div class="feature-event wrap clearfix">' +
+                                        
+                                        '<article class="card" itemscope itemtype="http://schema.org/Event">' +                           
+                                        
+                                        '<div class="fourcol first">' +
+                                            '<a href="' + post.url + '"><img src="' + post.thumbnail_images['media-small']['url'] + '" alt="' + post.title_plain + '"></a>' +                                        
+
+                                        '</div>' +
+
+                                        '<div class="eightcol last">' +
+
+                                            '<header>' +
+                                                '<a href="' + post.url + '" itemprop="url">' +
+                                                    '<h3 class="emphasis no-margin" itemprop="name">' + post.custom_fields['overlay_title'][0] + '</h3>' +
+                                                '</a>' +
+                                                '<time class="delta">' +
+                                                    '<span itemprop="startDate">' +
+                                                        date + 
+                                                    '</span>' +
+                                                '</time>' +
+                                            '</header>' +
+
+                                           '<p class="epsilon excerpt">' + excerpt + '</p>' +
+                                        '</div>' +
+
+                                        '</article>' +
+                                    '</div>' + 
+                                '</section>';
+                
+                            }
+
+                        }
+
+                        else if ( type == 'librarylearn' ) {
+
+                           if ( post.custom_fields['is_feature'][0] == 'no' ) {
+
+                                var excerpt = post.excerpt.replace(/(<([^>]+)>)/ig,""),
+                                    excerpt = excerpt.substring( 0, 275 );  
+
+                                count++;                                  
+
+                                markup = 
+                                '<section class="assorted-features background-base has-background hero clearfix">' + 
+                                    '<div class="feature-event wrap clearfix">' +
+                                        
+                                        '<article class="card" itemscope itemtype="http://schema.org/Event">' +                           
+                                        
+                                        '<div class="fourcol first">' +
+                                            '<a href="' + post.url + '"><img src="' + post.thumbnail_images['media-small']['url'] + '" alt="' + post.title_plain + '"></a>' +                                        
+
+                                        '</div>' +
+
+                                        '<div class="eightcol last">' +
+
+                                            '<header>' +
+                                                '<a href="' + post.url + '" itemprop="url">' +
+                                                    '<h3 class="emphasis no-margin" itemprop="name">' + post.custom_fields['overlay_title'][0] + '</h3>' +
+                                                '</a>' +
+                                            '</header>' +
+
+                                           '<p class="epsilon excerpt">' + excerpt + '</p>' +
+                                        '</div>' +
+
+                                        '</article>' +
+                                    '</div>' + 
+                                '</section>';
+                
+                            }
+
+                        }
+
+                        if ( type === 'database' ) {
+
+                            count++;
+
+                            if ( count == postNo ) {
+                                //console.log( post.thumbnail_images['media-medium']['url'] );
+                                markup = '<img src=' + post.thumbnail_images['media-medium']['url'] + '>';
+                            }
+                        }
+
+                    });
+
+                    el.html( markup );
+
+                });
+        });
+    }
+
+    if ( responsive_viewport >= 700 ) { 
+     
+        get_spotlight();
+
+    }
+
+
 /* ==================
  * Fire-up mejs for academy videos
  */ if ( $('body').hasClass('single-academy_video') || $('body').hasClass('home')) {

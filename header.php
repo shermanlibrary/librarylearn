@@ -37,17 +37,22 @@
 
 	<!-- Google Analytics
 	======================
-    --> <script>
-    
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    -->
+	 <script type="text/javascript">
 
-		  ga('create', 'UA-37110734-4', 'nova.edu');
-		  ga('send', 'pageview');
+		  /*var _gaq = _gaq || [];
+		  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+		  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+		  _gaq.push(['_setAccount', 'UA-37110734-2']);
+		  _gaq.push(['_trackPageview']);
 
-		</script>
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();*/
+
+	   </script>
 	
 		<div id="container">
 			
@@ -65,7 +70,7 @@
 					
 						<!-- Logo
 						======================
-						-->	<div id="logo" class="has-tagline" data-intro="Test" data-step="1">
+						-->	<div id="logo" class="has-tagline">
 								<a class="logo" href="<?php bloginfo('url');?>" title="<?php bloginfo('title'); ?>">
 									<span class="main-accent">Library</span>Learn
 								</a>
@@ -75,9 +80,10 @@
 							--> <span class="tagline">
 									beta
 								</span>		
-							</div><!--/#logo-->							
+			
+							</div><!--/#logo-->
 
-						</div><!--/.eightcol-->
+						</div><!--/.sixcol-->
 
 						<div class="<?php echo ( !$ua->isMobile ? 'align-left' : ''); ?> eightcol last">
 
@@ -92,11 +98,11 @@
 										<label class="label" for="top-menu"><?php echo library_academy_menu('primary', 'label'); ?></label>
 									</li>
 							
-								<!-- Empty Sub-Topic
-								======================
-								--> <li class="has-subnav secondary">									
-										<label class="label" for="top-menu"><?php echo library_academy_menu('secondary', 'label'); ?></label>
-									</li>
+							<!-- Empty Sub-Topic
+							======================
+							--> <li class="has-subnav secondary">									
+									<label class="label" for="top-menu"><?php echo library_academy_menu('secondary', 'label'); ?></label>
+								</li>
 
 								</ul>
 							</div>

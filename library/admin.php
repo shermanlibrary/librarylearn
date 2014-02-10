@@ -29,11 +29,11 @@ function sherman_welcome_panel() {
 					'<div class="welcome-column-container">'.
 						'<div class="welcome-panel-column">'.
 							'<a class="button button-primary button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase/making-instructional-videos-for-the-nsu-libraries/" target="new">Tutorial</a>'.
-							'<p>This is an in-depth guide to making instructional videos for the NSU Libraries. It covers raw specs, walkthroughs, and content strategy.</p>'.
+							//'<p>This is an in-depth guide to making instructional videos for the NSU Libraries. It covers raw specs, walkthroughs, and content strategy.</p>'.
 						'</div>'.
 						'<div class="welcome-panel-column">'.
 							'<a class="button button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase-category/library_learn/" target="new">Knowledgebase</a>'.
-							'<p>"LibraryLearn" entries in the labs <strong>knowledgebase</strong> including best practices, various FAQs, and known issues.</p>'.
+							'<p>"LibraryLearn" entries in the <strong>knowledgebase</strong> including best practices, various FAQs, and known issues.</p>'.
 						'</div>'.
 					'</div>' .
 			'</section>'.
@@ -86,8 +86,7 @@ function disable_default_dashboard_widgets() {
 	remove_meta_box('dashboard_recent_comments', 'dashboard', 'core'); // Comments Widget
 	remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');  // Incoming Links Widget
 	remove_meta_box('dashboard_plugins', 'dashboard', 'core');         // Plugins Widget
-
-	 remove_meta_box('dashboard_quick_press', 'dashboard', 'core');  // Quick Press Widget
+	remove_meta_box('dashboard_quick_press', 'dashboard', 'core');  // Quick Press Widget
 	//remove_meta_box('dashboard_recent_drafts', 'dashboard', 'core');   // Recent Drafts Widget
 	remove_meta_box('dashboard_primary', 'dashboard', 'core');         //
 	remove_meta_box('dashboard_secondary', 'dashboard', 'core');       //
@@ -115,30 +114,26 @@ http://digwp.com/2010/10/customize-wordpress-dashboard/
 */
 
 // RSS Dashboard Widget
-function bones_rss_dashboard_widget() {
-	if(function_exists('fetch_feed')) {
-		include_once(ABSPATH . WPINC . '/feed.php');               // include the required file
-		$feed = fetch_feed('http://themble.com/feed/rss/');        // specify the source feed
-		$limit = $feed->get_item_quantity(7);                      // specify number of items
-		$items = $feed->get_items(0, $limit);                      // create an array of items
-	}
-	if ($limit == 0) echo '<div>The RSS Feed is either empty or unavailable.</div>';   // fallback message
-	else foreach ($items as $item) : ?>
+function changeblog_dashboard_widget() {
+	
+	echo '<div>';
+	wp_widget_rss_output(
+		array(
+			'url' => 'http://sherman.library.nova.edu/sites/labs/feed/',
+			'title' => 'Changeblog',
+			'items' => '3',
+			'show_summary' => 1,
+			'show_author' => 0,
+			'show_date' => 1
+			));
+	echo "</div>";
 
-	<h4 style="margin-bottom: 0;">
-		<a href="<?php echo $item->get_permalink(); ?>" title="<?php echo $item->get_date('j F Y @ g:i a'); ?>" target="_blank">
-			<?php echo $item->get_title(); ?>
-		</a>
-	</h4>
-	<p style="margin-top: 0.5em;">
-		<?php echo substr($item->get_description(), 0, 200); ?>
-	</p>
-	<?php endforeach;
 }
 
 // calling all custom dashboard widgets
 function bones_custom_dashboard_widgets() {
-	//wp_add_dashboard_widget('bones_rss_dashboard_widget', 'Recently on Themble (Customize on admin.php)', 'bones_rss_dashboard_widget');
+	//wp_add_dashboard_widget('bones_rss_dashboard_widget', 'Changeblog', 'bones_rss_dashboard_widget');
+	add_meta_box( 'changeblog_dashboard_widget', 'Changeblog', 'changeblog_dashboard_widget', 'dashboard', 'normal', 'high' );
 	/*
 	Be sure to drop any other created Dashboard Widgets
 	in this function and they will all load.
