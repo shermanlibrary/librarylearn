@@ -2,6 +2,8 @@
 
 <section class="background-base has-background hero media">
 
+	<div class="wrap clearfix">
+
 	<?php if (have_posts()) : while (have_posts()) : the_post(); setPostViews(get_the_ID());?>
 
 	<?php
@@ -34,6 +36,7 @@
 
 
 	<?php endif; ?>
+	</div>
 
 </section>
 

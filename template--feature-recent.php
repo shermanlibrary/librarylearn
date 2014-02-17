@@ -12,9 +12,10 @@
 	$excerpt = preg_replace( '/\s+?(\S+)?$/', '', substr( get_the_excerpt(), 0, 275) );
 ?>
 
-<section class="feature feature-event">
+<section class="feature">
 
-	<div class="feature-event" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>);">
+	<div class="feature-event video" style="background-image: url(<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>);">
+		<?php get_template_part( 'template-standard_video_format' ); ?>
 		<article class="card" itemscope="" itemtype="http://schema.org/Event"><header>
 			<a href="<?php the_permalink(); ?>" itemprop="url">
 			<h3 class="beta title no-margin" itemprop="name"><?php echo $title; ?></h3>

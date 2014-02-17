@@ -37,13 +37,14 @@ jQuery(document).ready(function($) {
                 audience            =   el.data( 'audience' ),
                 postNo              =   el.data('post'),
                 type                =   el.data('spotlight'),
+                template            =   el.data( 'template' ),
 
                 // placeholders
                 api, baseAPI, category, markup;
 
             baseAPI = ( type != 'librarylearn' ? 
                 '//sherman2.library.nova.edu/sites/spotlight/api/taxonomy/get_taxonomy_posts/?taxonomy=library-audience&callback=?' : 
-                '//sherman2.library.nova.edu/sites/demo/api/taxonomy/get_taxonomy_posts/?taxonomy=library-audience&callback=?'
+                '//sherman.library.nova.edu/sites/learn/api/taxonomy/get_taxonomy_posts/?taxonomy=library-audience&callback=?'
                 );
 
             // Who is the audience?
@@ -158,39 +159,86 @@ jQuery(document).ready(function($) {
 
                         else if ( type == 'librarylearn' ) {
 
-                           if ( post.custom_fields['is_feature'][0] == 'no' ) {
+                           if ( template != 'feature' ) { 
 
-                                var excerpt = post.excerpt.replace(/(<([^>]+)>)/ig,""),
-                                    excerpt = excerpt.substring( 0, 275 );  
+                               if ( post.custom_fields['is_feature'][0] == 'no' ) {
 
-                                count++;                                  
+                                    var excerpt = post.excerpt.replace(/(<([^>]+)>)/ig,""),
+                                        excerpt = excerpt.substring( 0, 275 );  
 
-                                markup = 
-                                '<section class="assorted-features background-base has-background hero clearfix">' + 
-                                    '<div class="feature-event wrap clearfix">' +
-                                        
-                                        '<article class="card" itemscope itemtype="http://schema.org/Event">' +                           
-                                        
-                                        '<div class="fourcol first">' +
-                                            '<a href="' + post.url + '"><img src="' + post.thumbnail_images['media-small']['url'] + '" alt="' + post.title_plain + '"></a>' +                                        
+                                    count++;                                  
 
-                                        '</div>' +
+                                    markup = 
+                                    '<section class="assorted-features background-base has-background hero clearfix">' + 
+                                        '<div class="feature-event wrap clearfix">' +
+                                            
+                                            '<article class="card" itemscope itemtype="http://schema.org/Event">' +                           
+                                            
+                                            '<div class="fourcol first">' +
+                                                '<a href="' + post.url + '"><img src="' + post.thumbnail_images['media-small']['url'] + '" alt="' + post.title_plain + '"></a>' +                                        
 
-                                        '<div class="eightcol last">' +
+                                            '</div>' +
 
-                                            '<header>' +
-                                                '<a href="' + post.url + '" itemprop="url">' +
-                                                    '<h3 class="emphasis no-margin" itemprop="name">' + post.custom_fields['overlay_title'][0] + '</h3>' +
-                                                '</a>' +
-                                            '</header>' +
+                                            '<div class="eightcol last">' +
 
-                                           '<p class="epsilon excerpt">' + excerpt + '</p>' +
-                                        '</div>' +
+                                                '<header>' +
+                                                    '<a href="' + post.url + '" itemprop="url">' +
+                                                        '<h3 class="emphasis no-margin" itemprop="name">' + ( post.custom_fields['overlay_title'][0] ? post.custom_fields['overlay_title'][0] : post.title ) + '</h3>' +
+                                                    '</a>' +
+                                                '</header>' +
 
-                                        '</article>' +
-                                    '</div>' + 
-                                '</section>';
-                
+                                               '<p class="epsilon excerpt">' + excerpt + '</p>' +
+                                            '</div>' +
+
+                                            '</article>' +
+                                        '</div>' + 
+                                    '</section>';
+                    
+                                }
+
+                            }
+
+                            else {
+
+                               if ( post.custom_fields['is_feature'][0] == 'yes' ) {
+
+                                    var excerpt = post.excerpt.replace(/(<([^>]+)>)/ig,""),
+                                        excerpt = excerpt.substring( 0, 275 );  
+
+                                    count++;                                  
+
+                                    markup = 
+                                    '<section class="feature">' +
+
+                                        '<div class="feature-event video" style="background-image: url(' + post.thumbnail_images['media-medium']['url'] + ');">';
+
+                                        if ( responsive_viewport >= 1024 ) {
+
+                                        markup +=
+                                            '<video controls poster="' + post.thumbnail_images['media-large']['url'] + '" height="100%" width="100%">' +
+                                                '<source type=\'video/webm; codecs="vp8, vorbis"\' src="//nova.edu/library/video/' +  post.custom_fields['academy_video_file'][0] + '.webm" >' +
+                                                '<source type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' src="//nova.edu/library/video/' +  post.custom_fields['academy_video_file'][0] + '.mp4" >' +
+                                            '</video>';
+                                        }
+
+                                        markup+=
+                                            '<article class="card" itemscope itemtype="http://schema.org/Event">' +   
+                                                '<header><a href="' + post.url + '">' +
+                                                    '<h3 class="beta title no-margin" itemprop="name">' + ( post.custom_fields['overlay_title'][0] ? post.custom_fields['overlay_title'][0] : post.title ) + '</h3>' +
+                                                '</a></header>' +
+
+                                                '<div class="has-excerpt">' +
+                                                    '<p class="epsilon excerpt">' + excerpt + '</p>' +
+                                                '</div>' +
+                                            
+                                                '<a class="button coral" href="' + post.url + '">Watch</a>' +
+
+                                            '</article>' +
+                                        '</div>' + 
+                                    '</section>';
+                    
+                                }
+
                             }
 
                         }
@@ -209,6 +257,13 @@ jQuery(document).ready(function($) {
 
                     el.html( markup );
 
+                    $('video').mediaelementplayer({
+        
+                        features: ['playpause','progress','current','duration','tracks','volume','fullscreen'],
+                        enableAutosize: false
+
+                    });
+
                 });
         });
     }
@@ -222,18 +277,28 @@ jQuery(document).ready(function($) {
 
 /* ==================
  * Fire-up mejs for academy videos
- */ if ( $('body').hasClass('single-academy_video') || $('body').hasClass('home')) {
+ */ if ( $('body').hasClass('single-academy_video') ) {
       $('video').mediaelementplayer({
         
-        features: ['playpause','progress','current','duration','tracks','volume','fullscreen']
+        features: ['playpause','progress','current','duration','tracks','volume','fullscreen'],
+        enableAutosize: false
 
       });
     }
 
     // TODO: Abstract this to IE9.js
     if ( $('html').hasClass('lt-ie9') ) {
-      $('nav.pill-menu .label').on('click', function( e ) {
-        $(this).next('.sub-menu').toggle();
+
+        $('nav.top-menu').css({
+            'height' : 'auto',
+            'visibility' : 'visible',
+            'display' : 'none'
+        })
+      $('.pill-menu .label').on('click', function( e ) {
+
+        var menu = $(this).attr('for');
+        $('nav.' + menu ).toggle();
+
       });
     }
 }); /* end of as page load scripts */

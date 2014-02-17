@@ -30,6 +30,154 @@
 
 if(function_exists("register_field_group"))
 {
+	register_field_group(array (
+		'id' => 'acf_video',
+		'title' => 'Video',
+		'fields' => array (
+			array (
+				'key' => 'field_52f9194f4c91e',
+				'label' => 'Special Templating',
+				'name' => 'academy_video_format',
+				'type' => 'select',
+				'instructions' => '<ol>
+		<li>
+		 <b>Standard</b> <br>You have all the individual pieces of your video (.mp4, .webm, .jpg, .srt / .vtt) and they have been uploaded to the library\\\'s media server. Videos in this way will be presented within the <b>video</b> element, adapt to any screen, and otherwise look pretty dashing.
+		
+		<p><small><b>Browser Support</b> [for reference]: Internet Explorer 9+, Google Chrome 3.0 +, Firefox 3.5 +, Opera 10.5 +, Safari 3.1 +</small></p>
+		</li>
+		
+		<li><b>Adobe Captivate</b> <br>Captivate project files need to be similarly uploaded, and these pages LibraryLearn will present within with an iframe.</li>
+		</ol>',
+				'choices' => array (
+					'standard' => 'Standard ( :) )',
+					'captivate' => 'Adobe Captivate ( :( )',
+				),
+				'default_value' => 'standard',
+				'allow_null' => 0,
+				'multiple' => 0,
+			),
+			array (
+				'key' => 'field_52f91aa116e75',
+				'label' => 'Files',
+				'name' => 'academy_checklist',
+				'type' => 'checkbox',
+				'instructions' => '<p>Let\'s make sure you have everything you need. If not, you should save this draft and get all these things together.</p>',
+				'required' => 1,
+				'choices' => array (
+					'webm' => 'WebM Video',
+					'mp4' => 'MP4 Video',
+					'srt' => 'Captions ( SRT )',
+					'jpg' => '16:9 Screenshot',
+				),
+				'default_value' => '',
+				'layout' => 'vertical',
+			),
+			array (
+				'key' => 'field_52f91b4016e76',
+				'label' => 'The File Name',
+				'name' => 'academy_video_file',
+				'type' => 'text',
+				'instructions' => '<p>As you know, each component shares its file name. LibraryLearn needs to know <b>the root</b>, which fore instance may look like <b>apa--citation_management(05-2013)</b>.
+		</p>
+		<p><small>
+		<b>Did this make you go, "Huh!?"</b> Please review <a href="http://sherman.library.nova.edu/sites/labs/knowledgebase/file-naming-guidelines-for-webvideo-files/" target="new" title="File Naming Guidelines">the NSU Libraries\\\' file naming guidelines</a>.
+		</small>',
+				'required' => 1,
+				'conditional_logic' => array (
+					'status' => 1,
+					'rules' => array (
+						array (
+							'field' => 'field_52f91aa116e75',
+							'operator' => '==',
+							'value' => 'webm',
+						),
+						array (
+							'field' => 'field_52f9194f4c91e',
+							'operator' => '==',
+							'value' => 'standard',
+						),
+						array (
+							'field' => 'field_52f91aa116e75',
+							'operator' => '==',
+							'value' => 'jpg',
+						),
+						array (
+							'field' => 'field_52f91aa116e75',
+							'operator' => '==',
+							'value' => 'srt',
+						),
+						array (
+							'field' => 'field_52f91aa116e75',
+							'operator' => '==',
+							'value' => 'mp4',
+						),
+					),
+					'allorany' => 'all',
+				),
+				'default_value' => '',
+				'placeholder' => 'apa--citation_management(05-2013)',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'none',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_52f91c7ef7009',
+				'label' => 'Upload Captions ( .srt / .vtt )',
+				'name' => 'captions',
+				'type' => 'file',
+				'save_format' => 'url',
+				'library' => 'all',
+			),
+			array (
+				'key' => 'field_52f91cb3f700a',
+				'label' => 'Captivate URL',
+				'name' => 'captivate_url',
+				'type' => 'text',
+				'required' => 1,
+				'conditional_logic' => array (
+					'status' => 1,
+					'rules' => array (
+						array (
+							'field' => 'field_52f9194f4c91e',
+							'operator' => '==',
+							'value' => 'captivate',
+						),
+					),
+					'allorany' => 'all',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'none',
+				'maxlength' => '',
+			),
+		),
+		'location' => array (
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'academy_video',
+					'order_no' => 0,
+					'group_no' => 0,
+				),
+			),
+		),
+		'options' => array (
+			'position' => 'acf_after_title',
+			'layout' => 'default',
+			'hide_on_screen' => array (
+			),
+		),
+		'menu_order' => 0,
+	));
+}
+
+
+if(function_exists("register_field_group"))
+{
 		register_field_group(array (
 		'id' => 'acf_marketing-options',
 		'title' => 'Marketing Options',
@@ -185,150 +333,6 @@ if(function_exists("register_field_group"))
 						<li><b>Title</b> your image something sensible and human (not "picture305.jpg").</li>
 						<li>For accessibility purposes your image <b>must</b> have "Alt Text." Alt text is a description of the image for the hearing impaired. So if you upload a picture of a horse, the alt text might be, "A brown horse standing in a field."</li>
 					</ol>',
-			),
-		),
-		'location' => array (
-			array (
-				array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'academy_video',
-					'order_no' => 0,
-					'group_no' => 0,
-				),
-			),
-		),
-		'options' => array (
-			'position' => 'acf_after_title',
-			'layout' => 'default',
-			'hide_on_screen' => array (
-			),
-		),
-		'menu_order' => 0,
-	));
-
-	register_field_group(array (
-		'id' => 'acf_video',
-		'title' => 'Video',
-		'fields' => array (
-			array (
-				'key' => 'field_52f9194f4c91e',
-				'label' => 'Special Templating',
-				'name' => 'academy_video_format',
-				'type' => 'select',
-				'instructions' => '<ol>
-		<li>
-		 <b>Standard</b> <br>You have all the individual pieces of your video (.mp4, .webm, .jpg, .srt / .vtt) and they have been uploaded to the library\\\'s media server. Videos in this way will be presented within the <b><video></b> element, adapt to any screen, and otherwise look pretty dashing.
-		
-		<p><small><b>Browser Support</b> [for reference]: Internet Explorer 9+, Google Chrome 3.0 +, Firefox 3.5 +, Opera 10.5 +, Safari 3.1 +</small></p>
-		</li>
-		
-		<li><b>Adobe Captivate</b> <br>Captivate project files need to be similarly uploaded, and these pages LibraryLearn will present within with an iframe.</li>
-		</ol>',
-				'choices' => array (
-					'standard' => 'Standard ( :) )',
-					'captivate' => 'Adobe Captivate ( :( )',
-				),
-				'default_value' => 'standard',
-				'allow_null' => 0,
-				'multiple' => 0,
-			),
-			array (
-				'key' => 'field_52f91aa116e75',
-				'label' => 'Files',
-				'name' => 'academy_checklist',
-				'type' => 'checkbox',
-				'instructions' => '<p>Let\'s make sure you have everything you need. If not, you should save this draft and get all these things together.</p>',
-				'required' => 1,
-				'choices' => array (
-					'webm' => 'WebM Video',
-					'mp4' => 'MP4 Video',
-					'srt' => 'Captions ( SRT )',
-					'jpg' => '16:9 Screenshot',
-				),
-				'default_value' => '',
-				'layout' => 'vertical',
-			),
-			array (
-				'key' => 'field_52f91b4016e76',
-				'label' => 'The File Name',
-				'name' => 'academy_video_file',
-				'type' => 'text',
-				'instructions' => '<p>As you know, each component shares its file name. LibraryLearn needs to know <b>the root</b>, which fore instance may look like <b>apa--citation_management(05-2013)</b>.
-		</p>
-		<p><small>
-		<b>Did this make you go, "Huh!?"</b> Please review <a href="http://sherman.library.nova.edu/sites/labs/knowledgebase/file-naming-guidelines-for-webvideo-files/" target="new" title="File Naming Guidelines">the NSU Libraries\\\' file naming guidelines</a>.
-		</small>',
-				'required' => 1,
-				'conditional_logic' => array (
-					'status' => 1,
-					'rules' => array (
-						array (
-							'field' => 'field_52f91aa116e75',
-							'operator' => '==',
-							'value' => 'webm',
-						),
-						array (
-							'field' => 'field_52f9194f4c91e',
-							'operator' => '==',
-							'value' => 'standard',
-						),
-						array (
-							'field' => 'field_52f91aa116e75',
-							'operator' => '==',
-							'value' => 'jpg',
-						),
-						array (
-							'field' => 'field_52f91aa116e75',
-							'operator' => '==',
-							'value' => 'srt',
-						),
-						array (
-							'field' => 'field_52f91aa116e75',
-							'operator' => '==',
-							'value' => 'mp4',
-						),
-					),
-					'allorany' => 'all',
-				),
-				'default_value' => '',
-				'placeholder' => 'apa--citation_management(05-2013)',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'none',
-				'maxlength' => '',
-			),
-			array (
-				'key' => 'field_52f91c7ef7009',
-				'label' => 'Upload Captions ( .srt / .vtt )',
-				'name' => 'captions',
-				'type' => 'file',
-				'save_format' => 'url',
-				'library' => 'all',
-			),
-			array (
-				'key' => 'field_52f91cb3f700a',
-				'label' => 'Captivate URL',
-				'name' => 'captivate_url',
-				'type' => 'text',
-				'required' => 1,
-				'conditional_logic' => array (
-					'status' => 1,
-					'rules' => array (
-						array (
-							'field' => 'field_52f9194f4c91e',
-							'operator' => '==',
-							'value' => 'captivate',
-						),
-					),
-					'allorany' => 'all',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'formatting' => 'none',
-				'maxlength' => '',
 			),
 		),
 		'location' => array (

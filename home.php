@@ -1,5 +1,7 @@
 <?php get_header(); ?>
-<?php get_template_part('template--feature-recent'); ?>
+<?php //get_template_part('template--feature-recent'); ?>
+<div class="feature feature-event video" data-spotlight="librarylearn" data-audience data-category data-template="feature"></div>
+
 <?php get_template_part( 'template-search' ); ?>
 
 <!-- Menu
@@ -38,10 +40,6 @@
 	</p>
 
 </section>
-
-<div data-spotlight="librarylearn" data-audience data-category data-post="2"></div>
-
-
 
 <!-- Content!
 ======================

@@ -1,4 +1,4 @@
-<nav class="menu universal tinsley-gradient">
+<div class="menu universal tinsley-gradient">
 	<div class="wrap clearfix">
 
 		<a class="nsu" href="http://www.nova.edu/community/libraries.html" title="Nova Southeastern University" >
@@ -6,4 +6,4 @@
 		</a>
 		
 	</div>				
-</nav><!--/.universal-->
+</div><!--/.universal-->

@@ -28,9 +28,12 @@ function sherman_welcome_panel() {
 
 					'<div class="welcome-column-container">'.
 						'<div class="welcome-panel-column">'.
-							'<a class="button button-primary button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase/making-instructional-videos-for-the-nsu-libraries/" target="new">Tutorial</a>'.
-							//'<p>This is an in-depth guide to making instructional videos for the NSU Libraries. It covers raw specs, walkthroughs, and content strategy.</p>'.
+							'<a class="button button-primary button-hero" href="http://sherman.library.nova.edu/sites/learn/wp-admin/admin.php?page=cleverness-to-do-list" target="new">To-Do List</a>'.							
 						'</div>'.
+						'<div class="welcome-panel-column">'.
+							'<a class="button button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase/making-instructional-videos-for-the-nsu-libraries/" target="new">Tutorial</a>'.
+							//'<p>This is an in-depth guide to making instructional videos for the NSU Libraries. It covers raw specs, walkthroughs, and content strategy.</p>'.
+						'</div>'.						
 						'<div class="welcome-panel-column">'.
 							'<a class="button button-hero" href="//sherman.library.nova.edu/sites/labs/knowledgebase-category/library_learn/" target="new">Knowledgebase</a>'.
 							'<p>"LibraryLearn" entries in the <strong>knowledgebase</strong> including best practices, various FAQs, and known issues.</p>'.
@@ -69,7 +72,15 @@ add_filter( 'plugin_action_links', 'lock_plugins', 10, 4 );
  */ // This removes admin panel options
 function remove_menus() {
 global $menu;
-    $restricted = array(__('Posts'), __('Media'), __('Pages'), __('Users'), __('Settings'), __('Comments'), __('Plugins'), __('Tools'));
+    $restricted = array(
+    	__('Posts'), 
+    	__('Pages'), 
+    	__('Users'), 
+    	__('Settings'), 
+    	__('Comments'), 
+    	__('Plugins'), 
+    	__('Tools')
+    	);
     end ($menu);
     while (prev($menu)){
         $value = explode(' ',$menu[key($menu)][0]);
