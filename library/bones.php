@@ -52,9 +52,9 @@ need.
 
 function bones_head_cleanup() {
 	// category feeds
-	// remove_action( 'wp_head', 'feed_links_extra', 3 );                    
+	 remove_action( 'wp_head', 'feed_links_extra', 3 );                    
 	// post and comment feeds
-	// remove_action( 'wp_head', 'feed_links', 2 );                          
+	 remove_action( 'wp_head', 'feed_links', 2 );                          
 	// EditURI link
 	remove_action( 'wp_head', 'rsd_link' );                               
 	// windows live writer
@@ -103,15 +103,16 @@ SCRIPTS & ENQEUEING
 // loading modernizr and jquery, and reply script 
 function bones_scripts_and_styles() {
   if (!is_admin()) {
-  
+  	
+  	wp_deregister_script( 'jquery' );
     // modernizr (without media query polyfill)
-    wp_register_script( 'bones-modernizr', get_template_directory_uri() . '/library/js/libs/modernizr.custom.min.js', array(), '2.5.3', false );
+    wp_register_script( 'bones-modernizr', '//sherman2.library.nova.edu/cdn/scripts/libs/modernizr.custom.min.js', array(), '2.7.1', false );
  
     // register main stylesheet
-    wp_register_style( 'pls-stylesheet', '//sherman.library.nova.edu/cdn/styles/css/public-global/public.css', array(), '0.0.1', 'all' );
+    wp_register_style( 'pls-stylesheet', '//systems.library.nova.edu/cdn/styles/css/public-global/public.css', array(), '1.9.1', 'all' );
 
     // ie-only style sheet
-    wp_register_style( 'pls-ie-only', 'http://sherman.library.nova.edu/cdn/styles/css/public-global/public-ie.css', array(), '0.0.1' );
+    wp_register_style( 'pls-ie-only', '//systems.library.nova.edu/cdn/styles/css/public-global/public-ie.css', array(), '1.9.1' );
     
     // comment reply script for threaded comments
     if ( is_singular() AND comments_open() AND (get_option('thread_comments') == 1)) {
@@ -119,23 +120,21 @@ function bones_scripts_and_styles() {
     }
     
     //  load mediaelement.js (and styles) for the instructional video post-type.
-    if ( is_singular( 'academy_video' ) || is_front_page() ) {
+    if ( is_singular( 'academy_video' ) || is_front_page() ) { 
+
     	wp_enqueue_style( 'wp-mediaelement' );
-    	wp_enqueue_script( 'wp-mediaelement' );
+
     }
+
     //adding scripts file in the footer
-    wp_register_script( 'pls-js', get_template_directory_uri() . '/library/js/scripts.js', array( 'jquery' ), '', true );
+    wp_register_script( 'pls-js', '//sherman2.library.nova.edu/cdn/scripts/min/scripts.min.js', array(), '0.0.1', true );
    
     // enqueue styles and scripts
     wp_enqueue_script( 'bones-modernizr' ); 
+
     wp_enqueue_style( 'pls-stylesheet' ); 
-    wp_enqueue_style('pls-ie-only');
-    /*
-    I reccomend using a plugin to call jQuery
-    using the google cdn. That way it stays cached
-    and your site will load faster.
-    */
-    wp_enqueue_script( 'jquery' ); 
+    wp_enqueue_style( 'pls-ie-only' );
+
     wp_enqueue_script( 'pls-js' ); 
     
   }
@@ -147,9 +146,7 @@ function bones_ie_conditional( $tag, $handle ) {
 	if ( 'pls-ie-only' == $handle )
 		$tag = '<!--[if lt IE 9]>' . "\n" . $tag . '<![endif]-->' . "\n";
 	return $tag;
-} // MS Note: This was lte IE 9. I changed this because it appears IE9 is now up to snuff.
-
-
+} 
 
 /*********************
 MENUS & NAVIGATION
@@ -177,12 +174,6 @@ function bones_footer_links() {
 function bones_main_nav_fallback() { 
 	wp_page_menu( 'show_home=Home' ); 
 }
-
-// this is the fallback for footer menu
-function bones_footer_links_fallback() { 
-	/* you can put a default here if you like */ 
-}
-
 
 /* ==================
  * Return Library Learn Video Thumbnail
