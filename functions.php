@@ -9,7 +9,7 @@
  * We can't figure out how to get Detector to work inside a
  * WordPress, yet; until then we will use the UAParser directly,
  * with the intention to fully implement Detector when possible. */
-//require_once('library/Detector/lib/ua-parser-php/UAParser.php'); $ua = UA::parse(); 
+require_once('library/Detector/lib/ua-parser-php/UAParser.php'); $ua = UA::parse(); 
 
 
 /* ==================
