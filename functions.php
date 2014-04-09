@@ -327,8 +327,8 @@ function sherman_wpsearch() {
     $form = '<form role="search" method="get" id="searchform" action="' . home_url( '/' ) . '">
         <ul>
         <li class="append field">
-            <input class="xwide email input" type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="'.esc_attr__('Find a tutorial','bonestheme').'" x-webkit-speech speech />
-            <input class="search-button" type="submit" id="searchsubmit" value="'. esc_attr__('Go') .'" />
+            <input class="xwide email input" type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="'.esc_attr__('Search for a video ...','bonestheme').'" x-webkit-speech speech />
+            <input class="icon search-button" type="submit" id="searchsubmit" value="'. esc_attr__('X') .'" />
             </li></ul>
     </form>';
     return $form;

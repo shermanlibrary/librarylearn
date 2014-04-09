@@ -69,7 +69,7 @@
 				<ul class="menu">
 				<?php if ( $academy_video_format == 'standard' ) : ?>
 					<li>
-						<a href="<?php echo wp_get_attachment_url( get_post_meta( get_the_ID(), 'captions', true ) ); ?>.srt">Read the Transcript</a>
+						<a href="<?php echo wp_get_attachment_url( get_post_meta( get_the_ID(), 'captions', true ) ); ?>">Read the Transcript</a>
 					</li>
 					<li>
 						<a href="<?php echo $video_root; ?>.mp4" title="Download the MP4">Download the Video</a>

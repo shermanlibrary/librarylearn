@@ -122,14 +122,17 @@
 
 							<nav class="slide-panel-menu">
 
-								<label class="label" for="slide-panel"> <span class="icon-cancel"></span> </label>
-								
 								<div class="search">
 							
 									<?php echo sherman_wpsearch(); ?>
 								</div>
 							
 								<?php wp_nav_menu( array('menu' => 'Mobile Fly-Out' ) ); ?>
+
+								<label class="label button green" for="slide-panel"> 
+									Close Menu
+								</label>
+
 
 							</nav>
 

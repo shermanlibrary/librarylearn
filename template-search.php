@@ -8,7 +8,7 @@
 				<ul>
 					
 					<div class="fourcol first">
-						<label class="label">Search for Tutorials</label>
+						<label class="label">Search for a Video</label>
 					</div>
 
 					<div class="eightcol last align-right">

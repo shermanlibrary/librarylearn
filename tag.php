@@ -4,41 +4,46 @@
 			
 				<div id="inner-content" class="clearfix">
 				
-				    <div id="main" class="clearfix" role="main">
-				
+				    <div id="main" class="wrap clearfix" role="main">
+
+				    	 <header>
+				    	 	<h1 class="hide-accessible">Videos under "<?php single_cat_title();?>"</h1>
+				    	 	<p class="no-margin">
+				    	 		Tag: <strong><?php single_cat_title(); ?></strong>
+				    	 	</p>
+				    	 </header>		
+
 					    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					
-					    <article id="post-<?php the_ID(); ?>" <?php post_class('contrast-against-dark clearfix portlet'); ?> role="article">
+					    <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix portlet'); ?> role="article">
 							
-							<div class="wrap">
-							<div class="fourcol first">
-							<div class="media">
-	    						<?php $thumbnail = 'http://www.nova.edu/library/video/' . get_post_meta( get_the_ID(), 'academy_video_file', true ) . '.jpg'; ?>
+							<div class="twocol first media">
+	    						
 								<a class="thumbnail" href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
-									<img src="<?php echo $thumbnail; ?>">					
+									<?php echo ( has_post_thumbnail() ? the_post_thumbnail( 'media-small' ) : '<img src=http://placehold.it/640x360>' ); ?>
 								</a>
-							</div></div>
 
-							<div class="eightcol last">
-						    <h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+								<p class="small-text">
+									<span class="icon-mobile" aria-hidden="true"></span> <?php echo getPostViews(get_the_ID()); ?> Views
+								</p>
 
-						    <p class="meta">
-								<time class="icon-calendar" datetime="<?php echo the_time('Y-m-j'); ?>" pubdate> 
-									<?php the_time('F jS, Y'); ?>
-								</time> 
+							</div>
 
-								<span class="icon-mobile"> <?php echo getPostViews(get_the_ID()); ?> views</span>
-							</p>			
+							<div class="tencol last">
+								<header>
+							    	<h2 class="delta no-margin"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+						    	</header>
 
-						    <section class="post-content clearfix">
-						
-								    <?php the_excerpt(); ?>
+							    <section class="post-content clearfix">						
+									   <p><?php echo get_the_excerpt(); ?></p>
+							    </section> <!-- end article section -->
+
+							    <footer class="small-text">
+							    	<?php the_tags( 'Tags: ' ); ?>
+							    </footer>
+							    </div>
 					
-						    </section> <!-- end article section -->
-						    </div>
-						    </div>
-					
-					    </article> <!-- end article -->
+						    </article> <!-- end article -->
 					
 					    <?php endwhile; ?>	
 					
