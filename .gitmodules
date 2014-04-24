@@ -1,0 +1,3 @@
+[submodule "slides-librarylearn"]
+	path = slides-librarylearn
+	url = https://github.com/michaelschofield/slides-librarylearn.git
